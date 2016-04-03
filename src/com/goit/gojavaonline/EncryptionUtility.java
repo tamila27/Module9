@@ -11,6 +11,9 @@ public class EncryptionUtility {
         for (char c='A'; c<='Z'; c++){
             alphabet.add(c);
         }
+        for (char c='a'; c<='z'; c++){
+            alphabet.add(c);
+        }
     }
 
     public static StringBuilder encryptString(String sourceString){
@@ -27,7 +30,13 @@ public class EncryptionUtility {
 
     public static char encryptChar(char symbolForEncryption){
         char encryptedCharacter;
-        encryptedCharacter = alphabet.get((getCharacterIndexInAlphabet(symbolForEncryption) + key) % alphabet.size());
+        int characterIndexInAlphabet = getCharacterIndexInAlphabet(symbolForEncryption);
+        if(characterIndexInAlphabet == -1){
+            encryptedCharacter = symbolForEncryption;
+        }
+        else{
+            encryptedCharacter = alphabet.get( (characterIndexInAlphabet + key) % alphabet.size());
+        }
         return encryptedCharacter;
     }
 
@@ -56,7 +65,14 @@ public class EncryptionUtility {
 
     public static char decryptChar(char symbolForDecryption){
         char encryptedCharacter;
-        encryptedCharacter = alphabet.get((getCharacterIndexInAlphabet(symbolForDecryption) - key + alphabet.size()) % alphabet.size());
+        int charIndexInAlphabet = getCharacterIndexInAlphabet(symbolForDecryption);
+        if(charIndexInAlphabet == -1){
+            encryptedCharacter = symbolForDecryption;
+        }
+        else {
+            encryptedCharacter = alphabet.get(( charIndexInAlphabet - key + alphabet.size()) % alphabet.size());
+        }
+
         return encryptedCharacter;
     }
 }

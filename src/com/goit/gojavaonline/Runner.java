@@ -5,6 +5,7 @@ import com.goit.gojavaonline.module3_2.FlowerFactory;
 
 public class Runner {
     public static final int FLOWERS_COUNT = 10;
+    public static String encryptedTable;
     public static void main(String[] args){
 
         int flowersCount = getFlowersCount(args);
@@ -17,6 +18,8 @@ public class Runner {
         printFlowersInBouquetTable(bouquet);
 
         printEncryptedFlowersInBouquetTable(bouquet);
+
+        printDecryptedFlowersInBouquetTable();
 
     }
     private static int getFlowersCount(String[] args){
@@ -47,13 +50,14 @@ public class Runner {
 
     private static void printEncryptedFlowersInBouquetTable(Bouquet bouquet){
         if(bouquet != null){
-            System.out.printf(bouquet.toEncryptedTableString());
+            encryptedTable = EncryptionUtility.encryptString(bouquet.toTableString()).toString();
+            System.out.println(encryptedTable);
         }
     }
 
-    private static void printDecryptedFlowersInBouquetTable(Bouquet bouquet){
-        if(bouquet != null){
-            System.out.printf(bouquet.toDecryptedTableString());
+    private static void printDecryptedFlowersInBouquetTable(){
+        if(encryptedTable != null){
+            System.out.println(EncryptionUtility.decryptString(encryptedTable));
         }
     }
 }

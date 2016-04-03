@@ -16,7 +16,6 @@ public class ArrayUtility {
             }
         }
         return min;
-        
     }
 
     public static int getMaxInArray(int[] array){
